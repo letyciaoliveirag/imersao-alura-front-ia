@@ -1,0 +1,115 @@
+<!-- Documento HTML básico -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- Metadados essenciais: charset e viewport para responsividade -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título da página mostrado na aba do navegador -->
+    <title>Netflix</title>
+    <!-- Link para a folha de estilos principal -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Cabeçalho do site: contém o título/brand -->
+    <header class="site-header">
+        <h1>Netflix</h1>
+        <!-- Botão toggle do tema: visual (sem texto) para alternância dark/light -->
+        <button id="theme-toggle" aria-pressed="false" aria-label="Alternar tema" title="Alternar tema" class="theme-toggle">
+            <!-- Ícone sol 3D 'fofinho' (gradiente, sombras e carinha) -->
+            <svg class="icon-sun" aria-hidden="true" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <radialGradient id="sunGradCute" cx="35%" cy="30%">
+                        <stop offset="0%" stop-color="#fff9c4" />
+                        <stop offset="50%" stop-color="#ffe082" />
+                        <stop offset="100%" stop-color="#ffb74d" />
+                    </radialGradient>
+                    <filter id="sunDropCute" x="-50%" y="-50%" width="200%" height="200%">
+                        <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#000" flood-opacity="0.28" />
+                    </filter>
+                </defs>
+                <!-- corpo do sol -->
+                <g filter="url(#sunDropCute)">
+                    <circle cx="32" cy="30" r="12" fill="url(#sunGradCute)" />
+                </g>
+                <!-- raios fofos como bolinhas arredondadas -->
+                <g fill="#ffd54f" opacity="0.95">
+                    <circle cx="32" cy="10" r="3.8" />
+                    <circle cx="32" cy="50" r="3.8" />
+                    <circle cx="10" cy="30" r="3.8" />
+                    <circle cx="54" cy="30" r="3.8" />
+                    <circle cx="16" cy="14" r="3.2" />
+                    <circle cx="48" cy="46" r="3.2" />
+                    <circle cx="48" cy="14" r="3.2" />
+                    <circle cx="16" cy="46" r="3.2" />
+                </g>
+                <!-- carinha fofinha: olhos e sorriso -->
+                <g fill="#6d4c41" opacity="0.95">
+                    <circle cx="28" cy="30" r="1.6" />
+                    <circle cx="36" cy="30" r="1.6" />
+                    <path d="M27 34c1.2 1.2 2.8 1.8 5 1.2" stroke="#5d4037" stroke-width="1" stroke-linecap="round" fill="none" />
+                </g>
+            </svg>
+            <!-- Ícone lua 3D (gradiente + sombra) -->
+            <svg class="icon-moon" aria-hidden="true" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <radialGradient id="moonGrad" cx="35%" cy="30%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+                        <stop offset="60%" stop-color="#d6e0ff" stop-opacity="0.9" />
+                        <stop offset="100%" stop-color="#9fb3ff" stop-opacity="0.9" />
+                    </radialGradient>
+                    <filter id="moonDrop" x="-50%" y="-50%" width="200%" height="200%">
+                        <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.35" />
+                    </filter>
+                </defs>
+                <g filter="url(#moonDrop)">
+                    <path d="M42 12c-10 0-18 8-18 18s8 18 18 18c8 0 15-6 16-14-4 2-9 1-12-3-4-5-4-19-4-19z" fill="url(#moonGrad)" />
+                </g>
+            </svg>
+        </button>
+    </header>
+
+    <!-- Conteúdo principal da página -->
+    <main>
+        <!-- Título da seção: pergunta ao usuário quem está assistindo -->
+        <h2>Quem está assistindo?</h2>
+
+        <!-- Seção de perfis com atributo ARIA para acessibilidade -->
+        <section class="profiles" aria-label="Perfis de usuário">
+            <!-- Lista de perfis: usa <ul>/<li> para marcar itens relacionados -->
+            <ul class="profiles-list">
+                <!-- Cada item tem classes para estilo específico (profile-1/profile-2) -->
+                <li class="profile profile-1">
+                    <a href="./catalogo/catalogo.html" class="perfil" target="_blank" rel="noopener">
+                        <figure>
+                            <!--
+                                Avatar do perfil: use `alt` descritivo para acessibilidade.
+                                `src` aponta para a imagem dentro da pasta `assets`.
+                            -->
+                            <img src="assets/Fernandinho.png" alt="um personagem de cabelo arrepiado e barba rala">
+                            <!-- Legenda do avatar; usada também para styling via CSS -->
+                            <figcaption>Marido</figcaption>
+                        </figure>
+                    </a>
+                </li>
+                <li class="profile profile-2">
+                    <a href="./catalogo/catalogo.html" class="perfil" target="_blank" rel="noopener">
+                        <figure>
+                            <!-- Descrição no `alt` ajuda leitores de tela e SEO -->
+                            <img src="assets/Tici e ratinho.png" alt="uma personagem de cabelos ruivos e sardas do lado de um ratinho cinza">
+                            <figcaption>Esposa</figcaption>
+                        </figure>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Rodapé simples com informação de copyright -->
+    <footer class="site-footer">
+        <p>© 2026 Netflix</p>
+    </footer>
+    <!-- Script para funcionalidades da página -->
+    <script src="script.js"></script>
+</body>
+</html>

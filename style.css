@@ -1,0 +1,305 @@
+/* Variáveis globais: cores, sombras e escala tipográfica
+   - alterar aqui ajusta todo o tema rapidamente */
+:root {
+    /* Fundo principal e gradiente secundário */
+    --bg: #141414;
+    /* cor de fundo escura */
+    --bg-2: #0f0f0f;
+    /* variação para o gradiente */
+    --card: #1f1f1f;
+    /* cor de cartões/containers (não usado aqui) */
+    --accent: #E50914;
+    /* vermelho de destaque (Netflix) */
+
+    /* Cores temáticas para perfis (usadas em sombras e textos) */
+    --purple: #ffffff;
+    /* tom roxo para o perfil 1 */
+    --purple-soft: rgba(127, 63, 191, 0.12);
+    /* sombra roxa suave */
+    --blue: #ffffff;
+    /* tom azul para o perfil 2 */
+    --blue-soft: rgba(47, 144, 255, 0.12);
+    /* sombra azul suave */
+
+    /* Escala tipográfica reutilizável */
+    --fs-xxl: 3rem;
+    --fs-xl: 2rem;
+    --fs-lg: 1.25rem;
+    --fs-md: 1rem;
+    --fs-sm: .875rem;
+
+    /* Cores específicas por perfil (mapeadas para as variáveis acima) */
+    --p1-color: var(--purple);
+    --p1-soft: var(--purple-soft);
+    --p2-color: var(--blue);
+    --p2-soft: var(--blue-soft);
+
+    --text: #e6e6e6;
+    /* cor do texto principal */
+    --muted: #8c8c8c;
+    /* cor de texto secundário */
+}
+
+/* Reset básico: garante sizing previsível e remove espaçamentos padrão */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+}
+
+html,
+body {
+    height: 100%
+}
+
+/* Corpo da página: fundo em gradiente, tipografia e layout base */
+body {
+    background: linear-gradient(180deg, var(--bg), var(--bg-2));
+    /* fundo degradê */
+    color: var(--text);
+    /* cor do texto principal */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    /* sistema/stack */
+    -webkit-font-smoothing: antialiased;
+    /* suaviza fontes no WebKit */
+    -moz-osx-font-smoothing: grayscale;
+    /* suaviza fontes no Firefox macOS */
+    min-height: 100vh;
+    /* garante altura mínima da tela */
+    display: flex;
+    /* usar flex para centralizar conteúdo verticalmente */
+    flex-direction: column;
+    align-items: center;
+    /* centraliza horizontalmente */
+    transition: background .35s ease, color .25s ease;
+}
+
+/* Tema claro: sobrescreve variáveis para light mode
+   A classe `light` é aplicada ao <body> pelo script.js */
+body.light{
+    /* Gradiente claro inspirado na paleta Netflix:
+       leve tom pêssego/rosa no topo para dar calor, esfumaçado para branco */
+    --bg: #fff4f5; /* topo levemente rosado/pêssego */
+    --bg-2: #fffdfd; /* base quase branca */
+    --text: #111111; /* texto escuro */
+    --muted: #666666; /* texto secundário */
+    --card: #ffffff;
+    /* sombras de perfil mais sutis em modo claro */
+    --p1-soft: rgba(127,63,191,0.06);
+    --p2-soft: rgba(47,144,255,0.06);
+}
+
+/* Garantir que os nomes dos perfis fiquem pretos no modo claro */
+body.light .profile-1 figcaption,
+body.light .profile-2 figcaption{
+    color: var(--text);
+}
+
+/* Cabeçalho: título do site (destacado em vermelho) */
+.site-header {
+    width: 100%;
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+    position: relative; /* necessário para posicionar o toggle */
+}
+
+.site-header h1 {
+    color: var(--accent);
+    font-size: var(--fs-xxl);
+    letter-spacing: 2px;
+    margin: 0
+}
+
+/* Botão de alternância de tema (visual) */
+.theme-toggle{
+    /* botão visual: sem borda ou fundo visível, apenas o ícone SVG */
+    appearance:none;
+    border:0;
+    background:transparent; /* sem fundo visível */
+    padding:8px; /* área clicável confortável */
+    cursor:pointer;
+    position:absolute;
+    right:1.25rem;
+    top:50%;
+    transform:translateY(-50%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:auto;
+    height:auto;
+    box-shadow:none;
+    border-radius:999px; /* fundo circular ao redor do ícone */
+    background:rgba(255,255,255,0.06); /* cinza claro translúcido em dark mode */
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    transition:opacity .18s ease, transform .18s ease;
+}
+.theme-toggle:focus{outline:3px solid rgba(229,9,20,0.12);outline-offset:4px}
+
+/* Ícones dentro do botão: sol (light) e lua (dark).
+    Usamos `currentColor` no SVG para herdar cor do botão/tema. */
+.theme-toggle svg{width:30px;height:30px;display:block;pointer-events:none;opacity:0;transform:translateY(-2px) scale(.95);transition:opacity .22s ease, transform .22s cubic-bezier(.2,.8,.2,1)}
+.theme-toggle .icon-moon{opacity:1;transform:translateY(0) scale(1)}
+.theme-toggle.is-light svg{color:#fff}
+.theme-toggle.is-light .icon-sun{opacity:1;transform:translateY(0) scale(1)}
+.theme-toggle.is-light .icon-moon{opacity:0;transform:translateY(2px) scale(.9)}
+
+/* No modo claro, usar fundo cinza claro sólido ao redor do ícone */
+body.light .theme-toggle{
+    background:#f2f2f2; /* cinza claro */
+    box-shadow:0 2px 6px rgba(0,0,0,0.06);
+    border:1px solid rgba(0,0,0,0.04);
+}
+
+/* Acentua profundidade 3D com sombra do SVG externo */
+.theme-toggle .icon-sun, .theme-toggle .icon-moon{
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.32));
+}
+
+/* Conteúdo principal com largura máxima para legibilidade */
+main {
+    width: 100%;
+    max-width: 1100px;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+/* Container de perfis e lista: display flex para controle do espaçamento */
+.profiles {
+    width: 100%
+}
+
+.profiles-list {
+    list-style: none;
+    display: flex;
+    gap: .9rem;
+    padding: 0;
+    margin-top: 1.25rem;
+    justify-content: center;
+    flex-wrap: wrap
+}
+
+/* Remove a numeração das listas ordenadas internas dos perfis
+   (usamos <ol> por semântica, mas não queremos mostrar números) */
+/* (Removida: lista ordenada interna agora não é mais usada no HTML) */
+
+/* Cada perfil: centraliza conteúdo e adiciona transições suaves */
+.profile {
+    display: flex;
+    justify-content: center
+}
+
+.perfil {
+    text-decoration: none;
+    color: inherit;
+}
+
+.profile figure {
+    margin: 0;
+    text-align: center;
+    cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease
+}
+
+/* Avatar: tamanho fixo, cobertura da imagem e borda arredondada */
+.profile img {
+    width: 120px;
+    /* largura do avatar */
+    height: 120px;
+    /* altura do avatar - mantém proporção */
+    object-fit: cover;
+    /* recorta a imagem para cobrir o frame */
+    border-radius: 50%;
+    /* torna a imagem circular */
+    display: block;
+    border: 3px solid transparent;
+    /* borda neutra - muda no hover */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+    /* sombra base para elevação */
+}
+
+/* Legenda do avatar */
+.profile figcaption {
+    margin-top: .35rem;
+    color: var(--text);
+    font-weight: 600
+}
+
+/* Estilos específicos por perfil */
+.profile-1 img {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6), 0 8px 18px var(--p1-soft);
+}
+
+/* sombra roxa suave para perfil 1 */
+.profile-1 figcaption {
+    color: var(--p1-color);
+    font-size: var(--fs-md)
+}
+
+/* cor e tamanho do texto do perfil 1 */
+.profile-2 img {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6), 0 8px 18px var(--p2-soft);
+}
+
+/* sombra azul suave para perfil 2 */
+.profile-2 figcaption {
+    color: var(--p2-color);
+    font-size: var(--fs-md)
+}
+
+/* cor e tamanho do texto do perfil 2 */
+
+.profile:hover figure,
+.profile:focus-within figure {
+    transform: translateY(-6px) scale(1.03)
+}
+
+/* leve elevação ao passar o mouse */
+.profile:hover img,
+.profile:focus-within img {
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.75), 0 18px 40px rgba(127, 63, 191, 0.2);
+    border-color: transparent;
+}
+
+/* sombra e borda mais fortes no hover/focus */
+
+.site-footer {
+    width: 100%;
+    text-align: center;
+    padding: 1.25rem 0;
+    color: var(--muted);
+    font-size: .9rem
+}
+
+/* rodapé simples e centrado */
+
+/* Responsividade */
+/* Ajustes para telas pequenas */
+@media (max-width:480px) {
+    .site-header h1 {
+        font-size: var(--fs-xl)
+    }
+
+    /* título menor em mobile */
+    .profile img {
+        width: 96px;
+        height: 96px
+    }
+
+    /* avatars menores em mobile */
+    .profiles-list {
+        gap: 1rem
+    }
+
+    /* espaçamento levemente maior entre itens no mobile */
+}
+
+/* Pequenos toques para foco acessível */
+.profile:focus-within {
+    outline: none;
+}
+
+/* destaque de foco para acessibilidade */
