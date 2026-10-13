@@ -26,6 +26,6 @@ Clone da tela de seleção de perfis da Netflix, com alternância entre tema cla
 Feito por **Letycia Oliveira** — [GitHub](https://github.com/letyciaoliveirag)
 
 
-## Sobre este projeto
+# Sobre este projeto
 
 Foi o meu segundo projeto de front-end e o que me fez me apaixonar por programação.
