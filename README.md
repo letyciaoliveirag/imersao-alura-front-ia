@@ -6,7 +6,7 @@ Projeto feito na Imersão Alura de Front-end com IA.
 
 ## 📸 Preview
 
-![Preview do projeto](assets/preview.png)
+![Preview do projeto](preview.png)
 
 ## ✨ Funcionalidades
 
