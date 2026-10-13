@@ -1,8 +1,7 @@
 # 🎬 Netflix — Quem está assistindo?
 
-Segundo projeto de front-end que eu fiz, e foi ele que me fez me apaixonar por programação e código 💜
+Clone da tela de seleção de perfis da Netflix, com alternância entre tema claro e escuro. Feito com HTML, CSS e JavaScript durante a Imersão Alura de Front-end com IA.
 
-Projeto feito na Imersão Alura de Front-end com IA.
 
 ## 📸 Preview
 
@@ -25,3 +24,8 @@ Projeto feito na Imersão Alura de Front-end com IA.
 ## 👩‍💻 Autora
 
 Feito por **Letycia Oliveira** — [GitHub](https://github.com/letyciaoliveirag)
+
+
+## Sobre este projeto
+
+Foi o meu segundo projeto de front-end e o que me fez me apaixonar por programação.
